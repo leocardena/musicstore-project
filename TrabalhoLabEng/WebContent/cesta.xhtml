@@ -55,13 +55,13 @@ h1 {
 							<h:outputText value="#{item.produto.estoque.valorVenda}" />
 						</p:column>
 					</p:dataTable>
-					<br/>
-					<br/>
+					<br />
+					<br />
 					<h:panelGrid columns="2" cellspacing="5">
-						<p:commandButton value="Finalizar"
-						action="#{vendaMB.finalizarCompraRedirect()}" ajax="false" />
-						<p:commandButton value="Limpar"
-						action="#{vendaMB.limparCompra)}" ajax="false" />
+						<p:button value="Finalizar"
+							 href="/restrito_usuario/finalizar_compra.xhtml" ajax="false" />
+						<p:commandButton value="Limpar" action="#{vendaMB.limparCompra()}"
+							ajax="false" />
 					</h:panelGrid>
 				</h:form>
 			</div>
