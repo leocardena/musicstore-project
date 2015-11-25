@@ -30,7 +30,8 @@ public class VendaMB implements Serializable {
 	private ItemVendaDAO itemVendaDAO;
 	private Produto produtoSelecionado;
 	private int quantidade;
-	private float total;
+	
+	
 
 	public VendaMB() {
 		this.itemVendaDAO = new ItemVendaDAOImpl();
@@ -139,15 +140,6 @@ public class VendaMB implements Serializable {
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	public float getTotal() {
-		total = calcular();
-		return total;
-	}
-
-	public void setTotal(float total) {
-		this.total = total;
 	}
 
 }

@@ -58,8 +58,8 @@ h1 {
 					<br />
 					<br />
 					<h:panelGrid columns="2" cellspacing="5">
-						<p:button value="Finalizar"
-							 href="/restrito_usuario/finalizar_compra.xhtml" ajax="false" />
+						<p:commandButton value="Finalizar" action="#{vendaMB.finalizarCompraRedirect()}"
+							 acajax="false" />
 						<p:commandButton value="Limpar" action="#{vendaMB.limparCompra()}"
 							ajax="false" />
 					</h:panelGrid>
