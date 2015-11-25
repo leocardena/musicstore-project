@@ -57,7 +57,7 @@ public class ItemVendaDAOImpl implements ItemVendaDAO {
 			sql = "select produto.codigo ,produto.nome, SUM(item_venda.quantidade) as quantidade_vendida "
 					+ "from venda "
 					+ "inner join item_venda "
-					+ "on venda.codigo = item_venda.cod_produto "
+					+ "on venda.codigo = item_venda.cod_venda "
 					+ "inner join produto "
 					+ "on item_venda.cod_produto = produto.codigo "
 					+ "where month(venda.data_venda) = ? "
@@ -98,13 +98,13 @@ public class ItemVendaDAOImpl implements ItemVendaDAO {
 		
 		try {
 			Connection con = gc.getConnection();
-			sql = "select produto.codigo ,produto.nome, venda.valor , SUM(item_venda.quantidade) as quantidade_vendida "
+			sql = "select produto.codigo ,produto.nome , SUM(item_venda.quantidade) as quantidade_vendida "
 					+ "from venda "
 					+ "inner join item_venda "
-					+ "on venda.codigo = item_venda.cod_produto "
+					+ "on venda.codigo = item_venda.cod_venda "
 					+ "inner join produto "
 					+ "on item_venda.cod_produto = produto.codigo "
-					+ "group by produto.nome, produto.codigo, venda.valor, venda.data_venda "
+					+ "group by produto.nome, produto.codigo "
 					+ "order by produto.nome asc";
 			
 			PreparedStatement ps = con.prepareStatement( sql );
@@ -116,7 +116,6 @@ public class ItemVendaDAOImpl implements ItemVendaDAO {
 				
 				produto.setId( rs.getInt("codigo"));
 				produto.setNome( rs.getString("nome"));
-
 				
 				itemVenda.setQuantidade( rs.getInt("quantidade_vendida"));
 				itemVenda.setProduto(produto);

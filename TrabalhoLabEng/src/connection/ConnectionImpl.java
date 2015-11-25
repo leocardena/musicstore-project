@@ -23,12 +23,28 @@ public class ConnectionImpl implements GenericConnection {
 //			e.printStackTrace();
 //		}
 //		return con;
+//		try {
+//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
+//			con = DriverManager
+//					.getConnection(
+//							"jdbc:jtds:sqlserver://localhost:1433;"
+//							+"DatabaseName=music_store;namedPipe=true;instance=SQLExpress",
+//							"sa", "senha");
+//		} catch (ClassNotFoundException e) {
+//			System.out.println("ERRO"+e.getMessage());
+//		} catch (SQLException e) {
+//			System.out.println("ERRO"+e.getMessage());
+//		} catch (Exception e) {
+//			System.out.println("ERRO"+e.getMessage());
+//		}
+//		return con;
+		
 		try {
 			Class.forName("net.sourceforge.jtds.jdbc.Driver");
 			con = DriverManager
 					.getConnection(
 							"jdbc:jtds:sqlserver://localhost:1433;"
-							+"DatabaseName=music_store;namedPipe=true;instance=SQLExpress",
+							+"DatabaseName=musicstore;namedPipe=true",
 							"sa", "senha");
 		} catch (ClassNotFoundException e) {
 			System.out.println("ERRO"+e.getMessage());
@@ -38,20 +54,7 @@ public class ConnectionImpl implements GenericConnection {
 			System.out.println("ERRO"+e.getMessage());
 		}
 		return con;
-	}
-//		try {
-//			Class.forName("net.sourceforge.jtds.jdbc.Driver");
-//			con = DriverManager
-//					.getConnection("");
-//		} catch (ClassNotFoundException e) {
-//			System.out.println("ERRO"+e.getMessage());
-//		} catch (SQLException e) {
-//			System.out.println("ERRO"+e.getMessage());
-//		} catch (Exception e) {
-//			System.out.println("ERRO"+e.getMessage());
-//		}
-//		return con;
-	
+	}	
 
 	@Override
 	public void fechaConexao(Connection con) {
