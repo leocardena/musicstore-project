@@ -30,6 +30,7 @@ public class VendaMB implements Serializable {
 	private ItemVendaDAO itemVendaDAO;
 	private Produto produtoSelecionado;
 	private int quantidade;
+	private float total;
 
 	public VendaMB() {
 		this.itemVendaDAO = new ItemVendaDAOImpl();
@@ -64,11 +65,8 @@ public class VendaMB implements Serializable {
 	}
 
 	public void finalizarCompra() {
-		float valorTotal = 0;
+		float valorTotal = calcular();
 
-		for (ItemVenda itemVenda : itens) {
-			valorTotal += itemVenda.getProduto().getEstoque().getValorVenda() * itemVenda.getQuantidade();
-		}
 		venda.setValor(valorTotal);
 		venda.setData(new Date());
 		venda.setListaVenda(itens);
@@ -88,6 +86,14 @@ public class VendaMB implements Serializable {
 		} catch (VendaDAOException | ItemVendaDAOException e) {
 			System.out.println("ERRO" + e.getMessage());
 		}
+	}
+
+	private float calcular() {
+		float valor = 0;
+		for (ItemVenda itemVenda : itens) {
+			valor += itemVenda.getProduto().getEstoque().getValorVenda() * itemVenda.getQuantidade();
+		}
+		return valor;
 	}
 
 	public String finalizarCompraRedirect() {
@@ -133,6 +139,15 @@ public class VendaMB implements Serializable {
 
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public float getTotal() {
+		total = calcular();
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
 	}
 
 }

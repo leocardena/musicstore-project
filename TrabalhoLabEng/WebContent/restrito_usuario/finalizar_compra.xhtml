@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Music Store</title>
 
-</body>
+	<style type="text/css">
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+h1 {
+	padding-left: 585px;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="50">
+
+			<div class="header">
+				<ui:insert name="header">
+					<ui:include src="../header.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+
+		</p:layoutUnit>
+
+		<p:layoutUnit id="bottom" position="south" size="60">
+			<p:outputLabel value="&#169; 2015 music-store" />
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+			<div>
+				<h:form>
+					<h1>Cesta</h1>
+					<p:dataTable var="item" value="#{vendaMB.itens}">
+						<p:column headerText="Produto">
+							<h:outputText value="#{item.produto.nome}" />
+						</p:column>
+
+						<p:column headerText="Valor">
+							<h:outputText value="#{item.produto.estoque.valorVenda}" />
+						</p:column>
+					</p:dataTable>
+					
+			
+							<h:outputText value="#{vendaMB.total}" />	
+						
+					
+					<br/>
+					<br/>
+					<h:panelGrid>
+						<p:commandButton value="Finalizar"
+						action="#{vendaMB.finalizarCompra()}" ajax="false" />			
+					</h:panelGrid>
+				</h:form>
+			</div>
+		</p:layoutUnit>
+
+	</p:layout>
+
+
+</h:body>
+
 </html>
