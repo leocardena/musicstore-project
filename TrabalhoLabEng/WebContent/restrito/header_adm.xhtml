@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<h:form>
+
+		<p:menubar >
+
+			<p:menuitem value="Music Store" url="index_adm.xhtml" />
+
+			<p:submenu label="Produto">
+				<p:menuitem value="Inserir" url="inserir_produto.xhtml" ajax="false" />
+				<p:menuitem value="Editar" url="editar_produto.xhtml" ajax="false" />
+				<p:menuitem value="Remover" url="remover_produto.xhtml" ajax="false" />
+			</p:submenu>
+
+			<p:submenu label="Estatísticas">
+				<p:menuitem value="Produtos mais vendidos" url="relatorio.xhtml" ajax="false" />
+				<p:menuitem value="Lucro produtos vendidos" url="relatorio_lucro.xhtml" ajax="false" />
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:commandButton icon="ui-icon-key" value="Logout" action="#{loginMB.deslogar}" />
+			</f:facet>
+
+		</p:menubar>
+	</h:form>
+
+</h:body>
+</html>

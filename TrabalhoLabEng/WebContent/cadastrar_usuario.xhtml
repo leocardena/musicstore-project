@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Music Store</title>
+
+	<style type="text/css">
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+h1 {
+	padding-left: 585px;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="50">
+
+			<div class="header">
+				<ui:insert name="header">
+					<ui:include src="header.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+
+		</p:layoutUnit>
+
+		<p:layoutUnit id="bottom" position="south" size="60">
+			<p:outputLabel value="&#169; 2015 music-store" />
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+			<h:form>
+
+				<div id="div_cadastrar">
+					<h1>Cadastrar</h1>
+					<br /> <br />
+					<h:form id="form">
+
+						<p:messages autoUpdate="true" showSummary="true"
+							showDetail="false" />
+
+						<h:panelGrid columns="2" cellpadding="5">
+							<p:outputLabel value="Email: " for="email" />
+							<p:inputText id="email" size="50"
+								value="#{clienteMB.cliente.email}" required="true"
+								requiredMessage="O campo e-mail é obrigatório." />
+							<p:outputLabel value="Usuário: " for="usuario" />
+							<p:inputText id="usuario" size="30"
+								value="#{clienteMB.cliente.usuario}" required="true"
+								requiredMessage="O campo usário é obrigatório." />
+							<p:outputLabel value="Senha: " for="email" />
+							<p:password required="true" value="#{clienteMB.cliente.senha}"
+								requiredMessage="O campo senha é obrigatório" />
+						</h:panelGrid>
+
+						<p:separator />
+
+						<h:panelGrid columns="2" cellpadding="5">
+							<p:outputLabel value="Nome: " for="nome" />
+							<p:inputText id="nome" size="50"
+								value="#{clienteMB.cliente.nome}" required="true"
+								requiredMessage="O campo nome é obrigatório" />
+							<p:outputLabel value="Telefone" />
+							<h:panelGrid columns="3">
+								<p:inputText id="ddd" size="1" value="#{clienteMB.cliente.ddd}"
+									required="true" requiredMessage="O campo DDD é obrigatório" />
+								<p:outputLabel />
+								<p:inputText id="telefone" size="10"
+									value="#{clienteMB.cliente.telefone}" required="true"
+									requiredMessage="O campo telefone é obrigatório" />
+							</h:panelGrid>
+							<p:outputLabel value="CPF: " for="cpf" />
+							<p:inputText id="cpf" size="12" value="#{clienteMB.cliente.cpf}"
+								required="true" requiredMessage="O campo cpf é obrigatório" />
+							<p:outputLabel value="Data Nascimento: " for="dtanascimento" />
+							<p:calendar id="dtanascimento" locale="pt_BR"
+								pattern="dd/MM/yyyy" size="12"
+								value="#{clienteMB.cliente.dataNascimento}" />
+
+						</h:panelGrid>
+
+						<p:separator />
+						<h:panelGrid columns="2" cellpadding="6">
+							<p:outputLabel value="Logradouro: " for="logradouro" />
+							<p:inputText id="logradouro" size="35"
+								value="#{clienteMB.cliente.logradouro}" required="true"
+								requiredMessage="O campo logradouro é obrigatório" />
+
+							<p:outputLabel value="Número: " for="numero" />
+							<p:inputText id="numero" size="20"
+								value="#{clienteMB.cliente.numero}" required="true"
+								requiredMessage="O campo número é obrigatório" />
+
+							<p:outputLabel value="Bairro: " for="bairro" />
+							<p:inputText id="bairro" size="20"
+								value="#{clienteMB.cliente.bairro}" required="true"
+								requiredMessage="O campo bairro é obrigatório" />
+
+							<p:outputLabel value="Estado: " for="est" />
+							<h:selectOneMenu id="est" value="#{clienteMB.cliente.estado}">
+								<f:selectItems value="#{clienteMB.nomesEstados}" var="e"
+									itemLabel="#{e}" itemValue="#{e.estado}"></f:selectItems>
+							</h:selectOneMenu>
+
+							<p:outputLabel value="Cidade: " for="cidade" />
+							<p:inputText id="cidade" size="20"
+								value="#{clienteMB.cliente.cidade}" required="true"
+								requiredMessage="O campo Cidade é obrigatório" />
+
+							<p:outputLabel value="CEP: " for="cep" />
+							<p:inputText id="cep" size="50" value="#{clienteMB.cliente.cep}"
+								required="true" requiredMessage="O campo CEP é obrigatório" />
+							<p:outputLabel />
+
+						</h:panelGrid>
+
+						<p:commandButton value="Cadastrar" action="#{clienteMB.incluir}" />
+
+					</h:form>
+
+				</div>
+			</h:form>
+		</p:layoutUnit>
+
+	</p:layout>
+
+
+</h:body>
+
+</html>

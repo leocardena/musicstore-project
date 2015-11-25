@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style>
+.menubar {
+	position: absolute;
+	top: 300;
+}
+</style>
+
+</h:head>
+<h:body>
+	<h:form>
+
+		<p:menubar>
+
+			<p:menuitem value="Music Store" url="index.xhtml" />
+
+			<p:submenu label="Cordas">
+				<p:menuitem value="Guitarra"
+					action="#{menuViewController.pesquisarCategoria('Guitarra')}"
+					ajax="false" />
+				<p:menuitem value="Baixo"
+					action="#{menuViewController.pesquisarCategoria('Baixo')}"
+					ajax="false" />
+				<p:menuitem value="Ukulele"
+					action="#{menuViewController.pesquisarCategoria('Ukulele')}"
+					ajax="false" />
+				<p:menuitem value="Cavaco"
+					action="#{menuViewController.pesquisarCategoria('Cavaco')}"
+					ajax="false" />
+				<p:menuitem value="Violão"
+					action="#{menuViewController.pesquisarCategoria('Violão')}"
+					ajax="false" />
+				<p:menuitem value="Baixolão"
+					action="#{menuViewController.pesquisarCategoria('Baixolão')}"
+					ajax="false" />
+				<p:menuitem value="Banjo"
+					action="#{menuViewController.pesquisarCategoria('Banjo')}"
+					ajax="false" />
+			</p:submenu>
+
+			<p:submenu label="Percursão">
+				<p:menuitem value="Bateria"
+					action="#{menuViewController.pesquisarCategoria('Bateria')}"
+					ajax="false" />
+				<p:menuitem value="Bateria Eletrônica"
+					action="#{menuViewController.pesquisarCategoria('Bateria Eletrônica')}"
+					ajax="false" />
+				<p:menuitem value="Cajón"
+					action="#{menuViewController.pesquisarCategoria('Cajón')}"
+					ajax="false" />
+				<p:menuitem value="Pandeiro"
+					action="#{menuViewController.pesquisarCategoria('Pandeiro')}"
+					ajax="false" />
+				<p:menuitem value="Atabaque"
+					action="#{menuViewController.pesquisarCategoria('Atabaque')}"
+					ajax="false" />
+			</p:submenu>
+
+			<p:submenu label="Sopro">
+				<p:menuitem value="Flauta"
+					action="#{menuViewController.pesquisarCategoria('Flauta')}"
+					ajax="false" />
+				<p:menuitem value="Clarinete"
+					action="#{menuViewController.pesquisarCategoria('Clarinete')}"
+					ajax="false" />
+				<p:menuitem value="Saxofone"
+					action="#{menuViewController.pesquisarCategoria('Saxofone')}"
+					ajax="false" />
+				<p:menuitem value="Trompete"
+					action="#{menuViewController.pesquisarCategoria('Trompete')}"
+					ajax="false" />
+				<p:menuitem value="Trombone"
+					action="#{menuViewController.pesquisarCategoria('Trombone')}"
+					ajax="false" />
+			</p:submenu>
+
+			<p:submenu label="Áudio">
+				<p:menuitem value="Microfone"
+					action="#{menuViewController.pesquisarCategoria('Microfone')}"
+					ajax="false" />
+				<p:menuitem value="Fone"
+					action="#{menuViewController.pesquisarCategoria('Fone')}"
+					ajax="false" />
+				<p:menuitem value="Mesa Analógica"
+					action="#{menuViewController.pesquisarCategoria('Mesa Analógica')}"
+					ajax="false" />
+			</p:submenu>
+
+			<p:submenu label="Teclas">
+				<p:menuitem value="Piano"
+					action="#{menuViewController.pesquisarCategoria('Piano')}"
+					ajax="false" />
+				<p:menuitem value="Teclado"
+					action="#{menuViewController.pesquisarCategoria('Teclado')}"
+					ajax="false" />
+				<p:menuitem value="Acordeon/Sanfona"
+					action="#{menuViewController.pesquisarCategoria('Acordeon/Sanfona')}"
+					ajax="false" />
+			</p:submenu>
+
+			<p:submenu label="Acessórios">
+				<p:menuitem value="Cordas"
+					action="#{menuViewController.pesquisarCategoria('Cordas')}"
+					ajax="false" />
+				<p:menuitem value="Percursão"
+					action="#{menuViewController.pesquisarCategoria('Percursão')}"
+					ajax="false" />
+				<p:menuitem value="Sopro"
+					action="#{menuViewController.pesquisarCategoria('Sopro')}"
+					ajax="false" />
+				<p:menuitem value="Áudio"
+					action="#{menuViewController.pesquisarCategoria('Áudio')}"
+					ajax="false" />
+				<p:menuitem value="Teclas"
+					action="#{menuViewController.pesquisarCategoria('Teclas')}"
+					ajax="false" />
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" placeholder="Search"
+					ajax="false" value="#{menuViewController.input}" />
+				<p:commandButton icon="ui-icon-search" ajax="false"
+					action="#{menuViewController.pesquisarNome()}" />
+				<p:button  icon="ui-icon-cart" href="cesta.xhtml"
+					ajax="false" />
+				<p:button value="Login" icon="ui-icon-key" href="logar.xhtml"
+					ajax="false" />
+				<p:button value="Cadastrar-se" icon="ui-icon-pin-s"
+					href="cadastrar_usuario.xhtml" />
+			</f:facet>
+
+		</p:menubar>
+	</h:form>
+
+</h:body>
+</html>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Music Store</title>
+
+	<style type="text/css">
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="50">
+
+			<div class="header">
+				<ui:insert name="header">
+					<ui:include src="header.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+
+		</p:layoutUnit>
+
+		<p:layoutUnit id="bottom" position="south" size="60">
+			<p:outputLabel value="&#169; 2015 music-store" />
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+			<div>
+				<h:form id="form">
+					<p:dataTable value="#{produtoMB.listaProdutos()}" var="produto"
+						paginator="true" rows="5" sortBy="#{produto.nome}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+									{PreviousPageLink} {PageLinks}
+									{NextPageLink} {LastPageLink}
+									{RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" style="width: 80%">
+						<p:column>
+							<f:facet name="header">
+						Produto
+					</f:facet>
+							<h:outputText value="#{produto.nome}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Descrição
+					</f:facet>
+							<h:outputText value="#{produto.descricao}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Especificação
+					</f:facet>
+							<h:outputText value="#{produto.especificacao}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Valor
+					</f:facet>
+							<h:outputText value="#{produto.estoque.valorVenda}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Estoque
+					</f:facet>
+							<h:outputText value="#{produto.estoque.quantidade}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Comprar
+					</f:facet>
+							<p:commandLink update="formDialog:produtoEdit"
+								oncomplete="PF('produtoDialog').show()"
+								title="Produto adicionado a cesta">
+								<h:outputText styleClass="ui-icon ui-icon-circle-plus"
+									style="margin:0 auto;" />
+								<f:setPropertyActionListener value="#{produto}"
+									target="#{vendaMB.produtoSelecionado}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+
+
+				</h:form>
+
+			</div>
+		</p:layoutUnit>
+
+	</p:layout>
+	<div>
+		<p:dialog header="Produto adicionado a cesta"
+			widgetVar="produtoDialog" modal="true" showEffect="fade"
+			hideEffect="fade" resizable="false">
+			<h:form id="formDialog">
+				<p:outputPanel id="produtoEdit" style="text-align:center;">
+					<h:panelGrid rendered="#{not empty vendaMB.produtoSelecionado}"
+						columnClasses="label,value">
+						<h:outputText value="#{vendaMB.produtoSelecionado.nome}" />
+						<h:panelGrid columns="2">
+							<h:outputText value="Quantidade: " />
+							<h:inputText required="true" value="#{vendaMB.quantidade}" size="5"/>
+							<p:commandButton value="OK" action="#{vendaMB.adicionarProduto()}"
+								oncomplete="PF('produtoDialog').hide();" ajax="false"/>
+						</h:panelGrid>
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+	</div>
+
+</h:body>
+
+</html>

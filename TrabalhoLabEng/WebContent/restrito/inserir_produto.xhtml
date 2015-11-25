@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Music Store</title>
+
+	<style type="text/css">
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+h1 {
+	padding-left: 585px;
+}
+</style>
+</h:head>
+
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="50">
+
+			<div class="header">
+				<ui:insert name="header">
+					<ui:include src="header_adm.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+
+		</p:layoutUnit>
+
+		<p:layoutUnit id="bottom" position="south" size="60">
+			<p:outputLabel value="&#169; 2015 music-store" />
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+			<div id="div_inserirr">
+
+				<h1>Inserir Produto</h1>
+
+				<h:form id="form">
+
+					<p:messages autoUpdate="true" showSummary="true" showDetail="false" />
+
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<p:outputLabel value="Categoria: " for="categoria" />
+						<h:selectOneMenu id="categoria"
+							value="#{produtoMB.produto.categoria.nome}">
+							<f:selectItems value="#{produtoMB.categorias}" />
+						</h:selectOneMenu>
+
+						<p:outputLabel value="Nome: " for="nome" />
+						<p:inputText id="nome" size="50" required="true"
+							value="#{produtoMB.produto.nome}"
+							requiredMessage="O campo nome é obrigatório." />
+
+						<p:outputLabel value="Descrição: " for="descricao" />
+						<p:inputTextarea id="descricao" rows="6" cols="50" required="true"
+							value="#{produtoMB.produto.descricao}"
+							requiredMessage="O campo descrição é obrigatório." />
+
+						<p:outputLabel value="Especificação: " for="especificacao" />
+						<p:inputTextarea rows="6" cols="50" id="especificacao"
+							value="#{produtoMB.produto.especificacao}" required="true"
+							requiredMessage="O campo especificação é obrigatório" />
+
+
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h1>Estoque do Produto</h1>
+					<br />
+
+					<h:panelGrid columns="2" cellpadding="5">
+
+						<p:outputLabel value="Valor de custo: " for="custo" />
+						<p:inputText id="custo" size="10"
+							value="#{produtoMB.produto.estoque.valorCusto}" required="true"
+							requiredMessage="O campo valor custo é obrigatório." />
+
+						<p:outputLabel value="Valor de venda: " for="venda" />
+						<p:inputText id="venda" size="10"
+							value="#{produtoMB.produto.estoque.valorVenda}" required="true"
+							requiredMessage="O campo valor venda é obrigatório." />
+
+						<p:outputLabel value="Quantidade: " for="quantidade" />
+						<p:inputText id="quantidade" size="5"
+							value="#{produtoMB.produto.estoque.quantidade}" required="true"
+							requiredMessage="O campo quantidade é obrigatório." />
+
+					</h:panelGrid>
+
+					<br />
+					<p:commandButton value="Gravar" action="#{produtoMB.inserir()}" />
+
+				</h:form>
+
+			</div>
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+
+</h:body>
+
+</html>
