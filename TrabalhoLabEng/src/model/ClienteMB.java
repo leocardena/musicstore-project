@@ -2,9 +2,12 @@ package model;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+
 import persistence.ClienteDAO;
 import persistence.ClienteDAOException;
 import persistence.ClienteDAOImpl;
@@ -61,6 +64,11 @@ public class ClienteMB implements Serializable {
 			System.out.println("ERRO" + e.getMessage());
 		}
 	}
+	
+	public void enviarCaptcha() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Correto", "Correto");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
 
 	public SelectItem[] getNomesEstados() {

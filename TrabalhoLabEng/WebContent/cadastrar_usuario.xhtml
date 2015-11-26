@@ -17,10 +17,6 @@
 .ui-layout-north .ui-layout-unit-content {
 	overflow: visible !important;
 }
-
-h1 {
-	padding-left: 585px;
-}
 </style>
 </h:head>
 
@@ -41,13 +37,35 @@ h1 {
 		<p:layoutUnit id="bottom" position="south" size="60">
 			<p:outputLabel value="&#169; 2015 music-store" />
 		</p:layoutUnit>
+		
+				<p:layoutUnit position="west" size="200">
+			<p:graphicImage library="imagens" name="blackfriday.png" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200">
+			<h4 style="text-align: center">Parcerias</h4>
+			<br />
+			<p:link href="http://www.gibson.com/">
+				<p:graphicImage library="imagens" name="gibson.png" height="150"
+					width="180" />
+			</p:link>
+
+			<br />
+			<br />
+
+			<p:link href="http://www.rmv.com.br/">
+				<p:graphicImage library="imagens" name="rmv.gif" height="120"
+					width="190" />
+			</p:link>
+
+		</p:layoutUnit>
 
 		<p:layoutUnit id="center" position="center">
 			<h:form>
 
 				<div id="div_cadastrar">
-					<h1>Cadastrar</h1>
-					<br /> <br />
+					<h3>Cadastrar</h3>
+					<br /> 
 					<h:form id="form">
 
 						<p:messages autoUpdate="true" showSummary="true"
@@ -127,7 +145,15 @@ h1 {
 							<p:outputLabel />
 
 						</h:panelGrid>
-
+						<h:panelGrid columns="2">
+							<p:captcha label="Captcha" />
+							<p:commandButton value="Checar"
+								actionListener="#{clienteMB.enviarCaptcha()}" ajax="false"
+								icon="ui-icon-check" />
+						</h:panelGrid>
+						<br />
+						<br />
+						
 						<p:commandButton value="Cadastrar" action="#{clienteMB.incluir}" />
 
 					</h:form>

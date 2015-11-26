@@ -24,7 +24,7 @@
 
 	<p:layout fullPage="true">
 
-		<p:layoutUnit id="top" position="north" size="50">
+		<p:layoutUnit id="top" position="north" size="68">
 
 			<div class="header">
 				<ui:insert name="header">
@@ -40,10 +40,39 @@
 
 		<p:layoutUnit id="center" position="center">
 			<h:form>
-
+				<p:contentFlow value="#{produtoMB.buscarImagens()}" var="imagem"
+					style="border: none !important;">
+					<p:graphicImage library="imagens" name="#{imagem}"
+						styleClass="content" />
+					<div class="caption">#{imagem}</div>
+				</p:contentFlow>
 
 			</h:form>
 		</p:layoutUnit>
+
+
+		<p:layoutUnit position="west" size="200">
+			<p:graphicImage library="imagens" name="blackfriday.png" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200">
+			<h4 style="text-align: center">Parcerias</h4>
+			<br />
+			<p:link href="http://www.gibson.com/">
+				<p:graphicImage library="imagens" name="gibson.png" height="150"
+					width="180" />
+			</p:link>
+
+			<br />
+			<br />
+
+			<p:link href="http://www.rmv.com.br/">
+				<p:graphicImage library="imagens" name="rmv.gif" height="120"
+					width="190" />
+			</p:link>
+
+		</p:layoutUnit>
+
 
 	</p:layout>
 

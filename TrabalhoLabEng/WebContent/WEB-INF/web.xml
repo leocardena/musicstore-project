@@ -18,4 +18,15 @@
     <param-name>primefaces.THEME</param-name>
     <param-value>home</param-value>
   </context-param>
+  
+   <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6Ldv0hATAAAAAEjJyaO21VRGAmkvRrh8qA_H8e-9</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6Ldv0hATAAAAALvdjv0kn7rYZMl1Pv07VDAzei6r</param-value>
+    </context-param>
+  
 </web-app>

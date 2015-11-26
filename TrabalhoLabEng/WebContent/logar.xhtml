@@ -18,9 +18,6 @@
 	overflow: visible !important;
 }
 
-h1 {
-	padding-left: 585px;
-}
 </style>
 </h:head>
 
@@ -37,6 +34,28 @@ h1 {
 			</div>
 
 		</p:layoutUnit>
+		
+				<p:layoutUnit position="west" size="200">
+			<p:graphicImage library="imagens" name="blackfriday.png" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200">
+			<h4 style="text-align: center">Parcerias</h4>
+			<br />
+			<p:link href="http://www.gibson.com/">
+				<p:graphicImage library="imagens" name="gibson.png" height="150"
+					width="180" />
+			</p:link>
+
+			<br />
+			<br />
+
+			<p:link href="http://www.rmv.com.br/">
+				<p:graphicImage library="imagens" name="rmv.gif" height="120"
+					width="190" />
+			</p:link>
+
+		</p:layoutUnit>
 
 		<p:layoutUnit id="bottom" position="south" size="60">
 			<p:outputLabel value="&#169; 2015 music-store" />
@@ -44,7 +63,7 @@ h1 {
 
 		<p:layoutUnit id="center" position="center">
 			<h:form>
-				<h1>Login</h1>
+				
 				<br />
 				<br />
 
@@ -52,6 +71,8 @@ h1 {
 					style="float: right; margin-right: 525px; margin-top: 8px">
 
 					<h:form id="form">
+						<h3>Logar</h3>
+						<br/>
 						<p:messages autoUpdate="true" />
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Usuário: " for="usuario" />

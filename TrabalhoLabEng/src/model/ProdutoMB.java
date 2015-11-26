@@ -204,5 +204,19 @@ public class ProdutoMB {
 			new ProdutoDAOException();
 		}
 	}
+	
+	public List<String> buscarImagens(){
+		List<String> imagens = new ArrayList<String>();
+		imagens.add("baixo.jpg");
+		imagens.add("bateria.jpg");
+		imagens.add("flauta.jpg");
+		imagens.add("guitarra.jpg");
+		imagens.add("microfone.jpg");
+		imagens.add("sanfona.jpg");
+		imagens.add("saxofone.jpg");
+		imagens.add("ukulele.jpg");
+		imagens.add("violao.jpg");
+		return imagens;
+	}
 
 }
