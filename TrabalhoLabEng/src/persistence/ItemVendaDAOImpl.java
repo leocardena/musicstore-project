@@ -26,7 +26,7 @@ public class ItemVendaDAOImpl implements ItemVendaDAO {
 		
 		try {
 			Connection con = gc.getConnection();
-			sql = "insert into item_venda (cod_venda, cod_prod, quantidade)"
+			sql = "insert into item_venda (cod_venda, cod_produto, quantidade)"
 					+ "values (?, ?, ?)";
 		
 			PreparedStatement ps = con.prepareStatement( sql );
