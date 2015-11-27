@@ -10,7 +10,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
-
 import persistence.CategoriaDAO;
 import persistence.CategoriaDAOException;
 import persistence.CategoriaDAOImpl;
@@ -195,7 +194,7 @@ public class ProdutoMB {
 		}
 		return "editar_produto.xhtml?faces-redirect=true";
 	}
-	
+
 	public String removerPorCategoria() {
 		ProdutoDAO dao = new ProdutoDAOImpl();
 		try {
@@ -230,12 +229,10 @@ public class ProdutoMB {
 			e.printStackTrace();
 		}
 
-		
-
 		return editarPorCategoria();
 	}
-	
-	public String removerProduto(){
+
+	public String removerProduto() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		Map<String, Object> sessionMap = externalContext.getSessionMap();
 		Produto p = (Produto) sessionMap.get("produtoSelecionadoObj");
@@ -246,7 +243,7 @@ public class ProdutoMB {
 		} catch (ProdutoDAOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return removerPorCategoria();
 	}
 
