@@ -119,13 +119,15 @@
 
 				</h:form>
 
+
+
 			</div>
 		</p:layoutUnit>
 
 	</p:layout>
 
 	<p:dialog header="Editar Produto" widgetVar="produtoDialog"
-		modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+		modal="true" showEffect="fade" hideEffect="fade" resizable="false" appendToBody="true">
 		<h:form id="formDialog">
 			<p:outputPanel id="produtoEdit" style="text-align:center;">
 				<p:panelGrid columns="2"
@@ -157,17 +159,19 @@
 						required="true"
 						requiredMessage="O campo especificação é obrigatório" />
 
-					<p:outputLabel />
-
-					<p:commandButton value="Gravar"
-						action="#{produtoMB.atualizarProduto()}"
-						oncomplete="PF('produtoDialog').hide();" ajax="false"/>
-
 				</p:panelGrid>
-			</p:outputPanel>
-		</h:form>
-	</p:dialog>
 
+				<p:panelGrid>
+					<h:outputLabel />
+					<p:commandButton value="Gravar" action="#{produtoMB.atualizarProduto()}"
+						oncomplete="PF('produtoDialog').hide();" />
+				</p:panelGrid>
+
+			</p:outputPanel>
+
+		</h:form>
+
+	</p:dialog>
 </h:body>
 
 </html>

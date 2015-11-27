@@ -1,5 +1,6 @@
 package persistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +11,9 @@ import connection.ConnectionImpl;
 import connection.GenericConnection;
 import model.Cliente;
 
-public class ClienteDAOImpl implements ClienteDAO {
+public class ClienteDAOImpl implements ClienteDAO, Serializable {
 
+	private static final long serialVersionUID = 3218363831982705993L;
 	private GenericConnection gc;
 	private String sql;
 	

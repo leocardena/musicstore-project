@@ -1,5 +1,6 @@
 package persistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +14,9 @@ import model.Categoria;
 import model.Estoque;
 import model.Produto;
 
-public class ProdutoDAOImpl implements ProdutoDAO {
+public class ProdutoDAOImpl implements ProdutoDAO, Serializable {
 
+	private static final long serialVersionUID = 1101769912540687887L;
 	private GenericConnection gc;
 	private String sql;
 	private List<Produto> lista;
@@ -53,8 +55,8 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
 		try {
 			Connection con = gc.getConnection();
-			sql = "update produto set" + "nome = ? " + "descricao = ? " + "especificacao = ? " + "codigoCategoria = ? "
-					+ "codigoEstoque = ? " + "where codigo = ?";
+			sql = "update produto set" + " nome = ?, " + "descricao = ?, " + "especificacao = ?, "
+					+ "codigo_categoria = ?, " + "codigo_estoque = ? " + "where codigo = ?;";
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, produto.getNome());
@@ -62,6 +64,8 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 			ps.setString(3, produto.getEspecificacao());
 			ps.setLong(4, produto.getCategoria().getId());
 			ps.setLong(5, produto.getEstoque().getId());
+			System.out.println("estpque id: " + produto.getEstoque().getId());
+			System.out.println("pord? " + produto.getId());
 			ps.setInt(6, produto.getId());
 
 			ps.executeUpdate();
@@ -106,7 +110,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 					+ "on p.codigo_categoria = c.codigo " + "where p.nome like ?";
 
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, "%" +nome+ "%");
+			ps.setString(1, "%" + nome + "%");
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -219,7 +223,7 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
 		try {
 			Connection con = gc.getConnection();
-			sql = "SELECT e.valor_venda, " + "e.quantidade " + "FROM estoque e " + "INNER JOIN  produto p "
+			sql = "SELECT e.valor_venda, e.codigo, e.valor_custo, " + "e.quantidade " + "FROM estoque e " + "INNER JOIN  produto p "
 					+ "ON e.codigo = p.codigo_estoque " + "WHERE p.codigo = ?;";
 
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -227,6 +231,8 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				estoque.setValorVenda(rs.getFloat("valor_venda"));
+				estoque.setValorCusto(rs.getFloat("valor_custo"));
+				estoque.setId(rs.getInt("codigo"));
 				estoque.setQuantidade(rs.getInt("quantidade"));
 			}
 

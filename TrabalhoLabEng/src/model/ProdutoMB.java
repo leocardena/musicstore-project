@@ -169,6 +169,9 @@ public class ProdutoMB {
 
 	public void setProdutoSelecionado(Produto produtoSelecionado) {
 		this.produtoSelecionado = produtoSelecionado;
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		sessionMap.put("produtoSelecionadoObj", produtoSelecionado);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -193,16 +196,23 @@ public class ProdutoMB {
 		return "editar_produto.xhtml?faces-redirect=true";
 	}
 	
-	public void atualizarProduto(){
+	public String atualizarProduto(){
 		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
-		System.out.println("entrou no botao att");
-		try {
-			produtoDAO.atualizar(produtoSelecionado);
-			System.out.println("Produto Atualizado");
-		} catch (ProdutoDAOException e) {
-			System.out.println("exception");
-			new ProdutoDAOException();
-		}
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();	
+		Produto p = (Produto) sessionMap.get("produtoSelecionadoObj");
+		
+		
+			try {
+				produtoDAO.atualizar(p);
+				System.out.println("Produto Atualizado");
+			} catch (ProdutoDAOException e) {
+				e.printStackTrace();
+			}
+			
+		
+		return "editar_produto?faces-redirect=true";
 	}
 	
 	public List<String> buscarImagens(){

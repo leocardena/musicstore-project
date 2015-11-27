@@ -23,8 +23,6 @@ public class LoginFilter implements Filter, Serializable {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		System.out.println("ENTROU");
-
 		LoginMB loginMB = (LoginMB) ((HttpServletRequest) request).getSession().getAttribute("loginMB");
 
 		HttpServletRequest httpSR = (HttpServletRequest) request;

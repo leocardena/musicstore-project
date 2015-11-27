@@ -1,5 +1,6 @@
 package persistence;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +9,9 @@ import connection.ConnectionImpl;
 import connection.GenericConnection;
 import model.Venda;
 
-public class VendaDAOImpl implements VendaDAO{
+public class VendaDAOImpl implements VendaDAO, Serializable {
 
+	private static final long serialVersionUID = 4181682910101891906L;
 	private GenericConnection gc;
 	private String sql;
 	
