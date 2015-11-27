@@ -19,7 +19,7 @@
 }
 
 h1 {
-	padding-left: 585px;
+	text-align: -webkit-center;
 }
 </style>
 </h:head>
@@ -43,26 +43,129 @@ h1 {
 		</p:layoutUnit>
 
 		<p:layoutUnit id="center" position="center">
+
 			<div>
 
 				<h1>Remover Produto</h1>
+
 				<p:outputLabel value="Pesquisar produto por categoria: " />
+
 				<br />
 
 				<h:form>
 
-					<h:selectOneMenu id="categoria">
+					<h:selectOneMenu id="categoria"
+						value="#{produtoMB.produto.categoria.nome}">
 						<f:selectItems value="#{produtoMB.categorias}" />
 					</h:selectOneMenu>
+
 					<br />
 					<br />
-					<p:commandButton value="Pesquisar" />
+
+					<p:commandButton value="Pesquisar"
+						action="#{produtoMB.removerPorCategoria()}" />
+
 				</h:form>
+
 			</div>
+
+			<br />
+			<br />
+
+			<div>
+
+				<h:form id="form">
+					<p:dataTable value="#{produtoMB.listaProdutos()}" var="produto"
+						paginator="true" rows="5" sortBy="#{produto.nome}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+									{PreviousPageLink} {PageLinks}
+									{NextPageLink} {LastPageLink}
+									{RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" style="width: 80%">
+						<p:column>
+							<f:facet name="header">
+						Produto
+					</f:facet>
+							<h:outputText value="#{produto.nome}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Descrição
+					</f:facet>
+							<h:outputText value="#{produto.descricao}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Especificação
+					</f:facet>
+							<h:outputText value="#{produto.especificacao}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Valor
+					</f:facet>
+							<h:outputText value="#{produto.estoque.valorVenda}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Estoque
+					</f:facet>
+							<h:outputText value="#{produto.estoque.quantidade}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">
+						Excluir
+					</f:facet>
+							<p:commandLink update=":formDialog:produtoEdit"
+								oncomplete="PF('produtoDialog').show()" title="Excluir Produto">
+								<h:outputText styleClass="ui-icon ui-icon-trash"
+									style="margin:0 auto;" />
+								<f:setPropertyActionListener value="#{produto}"
+									target="#{produtoMB.produtoSelecionado}" />
+							</p:commandLink>
+						</p:column>
+
+					</p:dataTable>
+
+				</h:form>
+
+
+
+			</div>
+
 		</p:layoutUnit>
 
 	</p:layout>
 
+	<p:dialog header="Remover Produto" widgetVar="produtoDialog"
+		modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+		appendToBody="true">
+		<h:form id="formDialog">
+			<p:outputPanel id="produtoEdit" style="text-align:center;">
+				<p:panelGrid rendered="#{not empty produtoMB.produtoSelecionado}"
+					columnClasses="label,value">
+
+					<h:outputText value="Tem certeza que deseja remover" />
+					<br />
+					<h:outputText value=" o produto: " />
+					<br />
+					<h:outputText value="#{produtoMB.produtoSelecionado.nome}" />
+					<h:outputText value=" ?" />
+
+				</p:panelGrid>
+
+				<h:panelGrid columns="2" >
+					<p:commandButton value="Sim" action="#{produtoMB.removerProduto()}"
+						oncomplete="PF('produtoDialog').hide();" />
+					<p:commandButton value="Não"
+						oncomplete="PF('produtoDialog').hide();" />
+				</h:panelGrid>
+
+			</p:outputPanel>
+
+		</h:form>
+
+	</p:dialog>
 
 </h:body>
 

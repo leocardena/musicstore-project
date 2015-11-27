@@ -195,6 +195,20 @@ public class ProdutoMB {
 		}
 		return "editar_produto.xhtml?faces-redirect=true";
 	}
+	
+	public String removerPorCategoria() {
+		ProdutoDAO dao = new ProdutoDAOImpl();
+		try {
+			List<Produto> produtos = dao.pesquisarPorCategoria(produto.getCategoria().getNome());
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			Map<String, Object> sessionMap = externalContext.getSessionMap();
+			sessionMap.put("produtosObj", produtos);
+			return "remover_produto.xhtml?faces-redirect=true";
+		} catch (ProdutoDAOException e) {
+			e.printStackTrace();
+		}
+		return "remover_produto.xhtml?faces-redirect=true";
+	}
 
 	public String atualizarProduto() {
 		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
@@ -218,6 +232,11 @@ public class ProdutoMB {
 
 		
 
+		return editarPorCategoria();
+	}
+	
+	public String removerProduto(){
+		System.out.println("Produto excluído");
 		return editarPorCategoria();
 	}
 
