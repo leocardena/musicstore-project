@@ -236,8 +236,18 @@ public class ProdutoMB {
 	}
 	
 	public String removerProduto(){
-		System.out.println("Produto excluído");
-		return editarPorCategoria();
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
+		Produto p = (Produto) sessionMap.get("produtoSelecionadoObj");
+		try {
+			produtoDAO.remover(p.getId());
+			System.out.println("Produto excluído");
+			return editarPorCategoria();
+		} catch (ProdutoDAOException e) {
+			e.printStackTrace();
+		}
+		
+		return removerPorCategoria();
 	}
 
 	public List<String> buscarImagens() {

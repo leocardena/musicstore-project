@@ -81,7 +81,7 @@ public class ProdutoDAOImpl implements ProdutoDAO, Serializable {
 
 		try {
 			Connection con = gc.getConnection();
-			sql = "delete produto where id = ?";
+			sql = "delete produto where codigo = ?";
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
