@@ -64,8 +64,6 @@ public class ProdutoDAOImpl implements ProdutoDAO, Serializable {
 			ps.setString(3, produto.getEspecificacao());
 			ps.setLong(4, produto.getCategoria().getId());
 			ps.setLong(5, produto.getEstoque().getId());
-			System.out.println("estpque id: " + produto.getEstoque().getId());
-			System.out.println("pord? " + produto.getId());
 			ps.setInt(6, produto.getId());
 
 			ps.executeUpdate();

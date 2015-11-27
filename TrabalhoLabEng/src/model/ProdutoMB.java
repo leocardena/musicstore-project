@@ -32,13 +32,13 @@ public class ProdutoMB {
 	private List<Produto> lista;
 	private List<SelectItem> categorias;
 	private Produto produtoSelecionado;
-	
 
 	public ProdutoMB() {
 		this.produto = new Produto();
 		this.produtoDAO = new ProdutoDAOImpl();
 		this.estoqueDAO = new EstoqueDAOImpl();
 		this.categoriaDAO = new CategoriaDAOImpl();
+		this.produtoSelecionado = new Produto();
 	}
 
 	@PostConstruct
@@ -58,20 +58,20 @@ public class ProdutoMB {
 		sig3.setSelectItems(new SelectItem[] { new SelectItem("Flauta", "Flauta"),
 				new SelectItem("Clarinete", "Clarinete"), new SelectItem("Saxofone", "Saxofone"),
 				new SelectItem("Trompete", "Trompete"), new SelectItem("Trombone", "Trombone") });
-		
+
 		SelectItemGroup sig4 = new SelectItemGroup("Áudio");
-		sig4.setSelectItems(new SelectItem[] { new SelectItem("Microfone", "Microfone"),
-				new SelectItem("Fone", "Fone"), new SelectItem("Mesa Analógica", "Mesa Analógica")});
-		
+		sig4.setSelectItems(new SelectItem[] { new SelectItem("Microfone", "Microfone"), new SelectItem("Fone", "Fone"),
+				new SelectItem("Mesa Analógica", "Mesa Analógica") });
+
 		SelectItemGroup sig5 = new SelectItemGroup("Teclas");
-		sig5.setSelectItems(new SelectItem[] { new SelectItem("Piano", "Piano"),
-				new SelectItem("Teclado", "Teclado"), new SelectItem("Acordeon/Sanfona", "Acordeon/Sanfona")});
-		
+		sig5.setSelectItems(new SelectItem[] { new SelectItem("Piano", "Piano"), new SelectItem("Teclado", "Teclado"),
+				new SelectItem("Acordeon/Sanfona", "Acordeon/Sanfona") });
+
 		SelectItemGroup sig6 = new SelectItemGroup("Acessórios");
 		sig6.setSelectItems(new SelectItem[] { new SelectItem("Cordas", "Cordas"),
 				new SelectItem("Percursão", "Percursão"), new SelectItem("Sopro", "Sopro"),
 				new SelectItem("Áudio", "Áudio"), new SelectItem("Teclas", "Teclas") });
-		
+
 		categorias = new ArrayList<SelectItem>();
 		categorias.add(sig1);
 		categorias.add(sig2);
@@ -90,17 +90,17 @@ public class ProdutoMB {
 		this.produto = produto;
 	}
 
-	public void inserir() {		
+	public void inserir() {
 		try {
-			
+
 			int idCategoria = categoriaDAO.pesquisarIdPorNome(this.produto.getCategoria().getNome());
 			this.produto.getCategoria().setId(idCategoria);
-			
+
 			estoqueDAO.incluir(this.produto.getEstoque());
-			this.produto.getEstoque().setId( estoqueDAO.pesquisarUltimoId() );
-			
+			this.produto.getEstoque().setId(estoqueDAO.pesquisarUltimoId());
+
 			produtoDAO.inserir(this.produto);
-			
+
 			System.out.println("PRODUTO INSERIDO");
 		} catch (ProdutoDAOException | EstoqueDAOException | CategoriaDAOException e) {
 			System.out.println("ERRO" + e.getMessage());
@@ -162,7 +162,7 @@ public class ProdutoMB {
 	public void setCategorias(List<SelectItem> categorias) {
 		this.categorias = categorias;
 	}
-	
+
 	public Produto getProdutoSelecionado() {
 		return produtoSelecionado;
 	}
@@ -173,15 +173,15 @@ public class ProdutoMB {
 		Map<String, Object> sessionMap = externalContext.getSessionMap();
 		sessionMap.put("produtoSelecionadoObj", produtoSelecionado);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public ArrayList<Produto> listaProdutos(){
+	public ArrayList<Produto> listaProdutos() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		Map<String, Object> sessionMap = externalContext.getSessionMap();	
+		Map<String, Object> sessionMap = externalContext.getSessionMap();
 		ArrayList<Produto> produtos = (ArrayList<Produto>) sessionMap.get("produtosObj");
 		return produtos;
 	}
-	
+
 	public String editarPorCategoria() {
 		ProdutoDAO dao = new ProdutoDAOImpl();
 		try {
@@ -195,27 +195,33 @@ public class ProdutoMB {
 		}
 		return "editar_produto.xhtml?faces-redirect=true";
 	}
-	
-	public String atualizarProduto(){
+
+	public String atualizarProduto() {
 		ProdutoDAO produtoDAO = new ProdutoDAOImpl();
+		CategoriaDAO categoriaDAO = new CategoriaDAOImpl();
+		try {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			Map<String, Object> sessionMap = externalContext.getSessionMap();
+			Produto p = (Produto) sessionMap.get("produtoSelecionadoObj");
+			p.setNome(produtoSelecionado.getNome());
+			p.setDescricao(produtoSelecionado.getDescricao());
+			p.setEspecificacao(produtoSelecionado.getEspecificacao());
+			p.getCategoria().setId(categoriaDAO.pesquisarIdPorNome(produtoSelecionado.getCategoria().getNome()));
+
+			produtoDAO.atualizar(p);
+			System.out.println("Produto Atualizado");
+		} catch (ProdutoDAOException e) {
+			e.printStackTrace();
+		} catch (CategoriaDAOException e) {
+			e.printStackTrace();
+		}
+
 		
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		Map<String, Object> sessionMap = externalContext.getSessionMap();	
-		Produto p = (Produto) sessionMap.get("produtoSelecionadoObj");
-		
-		
-			try {
-				produtoDAO.atualizar(p);
-				System.out.println("Produto Atualizado");
-			} catch (ProdutoDAOException e) {
-				e.printStackTrace();
-			}
-			
-		
-		return "editar_produto?faces-redirect=true";
+
+		return editarPorCategoria();
 	}
-	
-	public List<String> buscarImagens(){
+
+	public List<String> buscarImagens() {
 		List<String> imagens = new ArrayList<String>();
 		imagens.add("baixo.jpg");
 		imagens.add("bateria.jpg");
